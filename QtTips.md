@@ -1,5 +1,5 @@
 1. 不要在单例模式的构造函数中与非单例所在类的信号函数或者槽函数进行连接<p> Do Not connect a signal or slot that not in the Signleton Class int the Singleton Class.<p>
-
+<p>
 2. 这里是一个 QSlider 的样式表<p>Here is a Style Sheet of a QSlider.<p>
   `"QSlider::groove:horizontal {border: 2px solid #999999;border-radius:4px; height: 15px;margin: 0px 0;left: 12px; right: 12px;}"`
 	`"QSlider::handle:horizontal {border: 2px solid #5c5c5c;border-radius:8px; background:yellow;width: 40px;margin: -10px -2px -10px -2px;}"`
@@ -10,3 +10,4 @@
 	<p>Note: the code **margin: -10px -2px -10px -2px;** could implement a slider handle that is larger than the slider groove
 
 	![](image/QSliderStyleSheet.png)
+<p>
