@@ -52,6 +52,15 @@
        }     
 	}
 	
-8. 如果需要发送自定义事件到 QT 事件循环中，可以使用如下代码先注册 自定义事件。<p>If you want to send a customed event to the Event Loop of QT Application, you can use the code to regist QCustomEvent first.
+8. 如果需要发送自定义事件到 QT 事件循环中，可以使用如下代码先注册 自定义事件。<p>If you want to send a customed event to the Event Loop of QT Application, you can use the code to regist QCustomEvent first.<p>
 		QEvent::Type myEventType = QEvent::Type(QEvent::registerEventType(1200));//you can replace 1200 with the number you want. using #define is better;
-		<p>
+		<p>然后使用如下代码 发送到事件循环中。<p> Then send it to the Event Lopp using the code as follow.<p>
+	QApplication::postEvent(this->parent()->parent(), new QEvent(myEventType));	
+	<p>使用如下代码进行接收处理<p> Using the code as folloe to process the event.<p>
+		if(e->type() == 1200)//using the number you defined
+	{
+		qDebug() << "process the event";
+	}
+	
+	
+		
