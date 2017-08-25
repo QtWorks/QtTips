@@ -10,7 +10,7 @@
 	<p>注意：代码 **margin: -10px -2px -10px -2px;** 可以实现滑条的滑块比滑条大。
 	<p>Note: the code **margin: -10px -2px -10px -2px;** could implement a slider handle that is larger than the slider groove
 
-3. 这里是一个 QStyledItemDelegate,它可以帮助你实现一个同时的存在右对齐图标和你设置的样式表的 QListWidget/QListView <p>Here is a QStyledItemDelegate,it could help you finish a QListWidget/QListView with a right-aligned icon and the style sheet you set.
+3. 这里是一个 QStyledItemDelegate,它可以帮助你实现一个同时的存在右对齐图标和你设置的样式表的 QListWidget/QListView <p>Here is a QStyledItemDelegate,it could help you finish a QListWidget/QListView with a right-aligned icon and the style sheet you set that exists at the same time.
 	
 		class myDelegate : public QStyledItemDelegate
 		{
@@ -30,4 +30,4 @@
 	    }
 		};
 	
-
+4. 如果你需要制作 makeqpf 请参考这篇文章 [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) ,并在 Ubuntu 16.04 下按步骤执行 <p>If you want to make a "makeqpf", the website  [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) could help you ,please follow the web and make it in Ununtu 16.04 .<p>
