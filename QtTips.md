@@ -31,3 +31,5 @@
 		};
 	
 4. 如果你需要制作 makeqpf 请参考这篇文章 [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) ,并在 Ubuntu 16.04 下按步骤执行 <p>If you want to make a "makeqpf", the website  [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) could help you ,please follow the web and make it in Ununtu 16.04 .<p>
+
+5.如果在单例模式类的构造函数中，将另一个实例化对象 通过 moveTOThread() 函数移动到另一个线程中，如果在构造函数中 start 该线程，则该 程序无法开机自动运行。<p> If the other instanced object is moved to another thread through the moveTOThread() function in the constructor of the Singleton Class,the program can not start while you set the program "run while boot".
