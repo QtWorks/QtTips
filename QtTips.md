@@ -36,3 +36,19 @@
 
 6. QPixmap QPixmap::grabWidget ( QWidget * widget, const QRect & rectangle ) [static] 可以对页面进行实时截图<p>Function QPixmap QPixmap::grabWidget ( QWidget * widget, const QRect & rectangle ) [static] could make a screenshot of the widget.
 
+7. 如果一个 QLabel 的 是不规则形状的（比如圆角矩形），如果想让 QLabel 中插入的图片呈现出完全一样的形状，可以使用下面的代码
+
+	void ClickableQLable::paintEvent(QPaintEvent *e)
+	{
+    	if(pixmap()){
+     	      QPainter painter(this);
+     	      painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+     	      QPainterPath path;
+	      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);
+	      painter.setClipPath(path);
+	      painter.drawPixmap(0, 0, width(), height(), *pixmap());
+       }else{
+           ClickableQLable::paintEvent(e);
+       }
+       
+}
