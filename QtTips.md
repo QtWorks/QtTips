@@ -9,6 +9,4 @@
 	<p>注意：代码 **margin: -10px -2px -10px -2px;** 可以实现滑条的滑块比滑条大。
 	<p>Note: the code **margin: -10px -2px -10px -2px;** could implement a slider handle that is larger than the slider groove
 
-	![](http://i.imgur.com/SlQigRU.png)
-
-3.
+	![](image/QSliderStyleSheet.png)
