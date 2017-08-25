@@ -38,29 +38,32 @@
 
 7. 如果一个 QLabel 的 是不规则形状的（比如圆角矩形），如果想让 QLabel 中插入的图片呈现出完全一样的形状，可以使用下面的代码。addRoundedRect() 函数可以换成其他函数，以实现不同的形状。<p>If a QLabel is an irregular shape (such as a rounded rectangle), you can use the following code if you want the picture inserted in QLabel to show exactly the same shape. The addRoundedRect () function can be replaced by other functions to implement different shapes.
 
-	void paintEvent(QPaintEvent *e)
-	{
-    	if(pixmap()){
-     	      QPainter painter(this);
-     	      painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-     	      QPainterPath path;
-	      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);// replace 10 with the size you want.
-	      painter.setClipPath(path);
-	      painter.drawPixmap(0, 0, width(), height(), *pixmap());
-       }else{
-           ClickableQLable::paintEvent(e);
-       }     
-	}
+		void paintEvent(QPaintEvent *e)
+		{
+	    	if(pixmap()){
+	     	      QPainter painter(this);
+	     	      painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	     	      QPainterPath path;
+		      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);// replace 10 with the size you want.
+		      painter.setClipPath(path);
+		      painter.drawPixmap(0, 0, width(), height(), *pixmap());
+	       }else{
+	           ClickableQLable::paintEvent(e);
+	       }     
+		}
 	
 8. 如果需要发送自定义事件到 QT 事件循环中，可以使用如下代码先注册 自定义事件。<p>If you want to send a customed event to the Event Loop of QT Application, you can use the code to regist QCustomEvent first.<p>
+
 		QEvent::Type myEventType = QEvent::Type(QEvent::registerEventType(1200));//you can replace 1200 with the number you want. using #define is better;
-		<p>然后使用如下代码 发送到事件循环中。<p> Then send it to the Event Lopp using the code as follow.<p>
-	QApplication::postEvent(this->parent()->parent(), new QEvent(myEventType));	
+    <p>然后使用如下代码 发送到事件循环中。<p> Then send it to the Event Lopp using the code as follow.<p>
+	
+		QApplication::postEvent(this->parent()->parent(), new QEvent(myEventType));	
 	<p>使用如下代码进行接收处理<p> Using the code as folloe to process the event.<p>
+		
 		if(e->type() == 1200)//using the number you defined
-	{
-		qDebug() << "process the event";
-	}
+		{
+			qDebug() << "process the event";
+		}
 	
 	
 		
