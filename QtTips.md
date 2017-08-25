@@ -36,19 +36,22 @@
 
 6. QPixmap QPixmap::grabWidget ( QWidget * widget, const QRect & rectangle ) [static] 可以对页面进行实时截图<p>Function QPixmap QPixmap::grabWidget ( QWidget * widget, const QRect & rectangle ) [static] could make a screenshot of the widget.
 
-7. 如果一个 QLabel 的 是不规则形状的（比如圆角矩形），如果想让 QLabel 中插入的图片呈现出完全一样的形状，可以使用下面的代码
+7. 如果一个 QLabel 的 是不规则形状的（比如圆角矩形），如果想让 QLabel 中插入的图片呈现出完全一样的形状，可以使用下面的代码。addRoundedRect() 函数可以换成其他函数，以实现不同的形状。<p>If a QLabel is an irregular shape (such as a rounded rectangle), you can use the following code if you want the picture inserted in QLabel to show exactly the same shape. The addRoundedRect () function can be replaced by other functions to implement different shapes.
 
-	void ClickableQLable::paintEvent(QPaintEvent *e)
+	void paintEvent(QPaintEvent *e)
 	{
     	if(pixmap()){
      	      QPainter painter(this);
      	      painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
      	      QPainterPath path;
-	      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);
+	      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);// replace 10 with the size you want.
 	      painter.setClipPath(path);
 	      painter.drawPixmap(0, 0, width(), height(), *pixmap());
        }else{
            ClickableQLable::paintEvent(e);
-       }
-       
-}
+       }     
+	}
+	
+8. 如果需要发送自定义事件到 QT 事件循环中，可以使用如下代码先注册 自定义事件。<p>If you want to send a customed event to the Event Loop of QT Application, you can use the code to regist QCustomEvent first.
+		QEvent::Type myEventType = QEvent::Type(QEvent::registerEventType(1200));//you can replace 1200 with the number you want. using #define is better;
+		<p>
