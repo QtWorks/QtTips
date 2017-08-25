@@ -8,27 +8,24 @@
         "QSlider::add-page:horizontal{background:red}"
 	 ![QSlider](image/QSliderStyleSheet.png)<p>
 	<p>注意：代码 **margin: -10px -2px -10px -2px;** 可以实现滑条的滑块比滑条大。
-	<p>Note: the code **margin: -10px -2px -10px -2px;** could implement a slider handle that is larger than the slider groove
+	<p>Note: The code **margin: -10px -2px -10px -2px;** could implement a slider handle that is larger than the slider groove
 
 3. 这里是一个 QStyledItemDelegate,它可以帮助你实现一个同时的存在右对齐图标和你设置的样式表的 QListWidget/QListView <p>Here is a QStyledItemDelegate,it could help you finish a QListWidget/QListView with a right-aligned icon and the style sheet you set that exists at the same time.
 	
-		class myDelegate : public QStyledItemDelegate
-		{
+	class myDelegate : public QStyledItemDelegate
+	{
 		public:
 		void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const{
-		
-		QStyleOptionViewItemV4 opt = option;
+			QStyleOptionViewItemV4 opt = option;
+		    initStyleOption(&opt,index);
+		    opt.decorationPosition = QStyleOptionViewItem::Right;
+		    opt.font.setBold(true);
     
-	    initStyleOption(&opt,index);
-    
-	    opt.decorationPosition   = QStyleOptionViewItem::Right;
-	    opt.font.setBold(true);
-    
-	    const QWidget *widget = opt.widget;
-	    QStyle *style = widget ? widget->style() : QApplication::style();
-	    style->drawControl(QStyle::CE_ItemViewItem,&opt,painter,widget);
-	    }
-		};
+		    const QWidget *widget = opt.widget;
+		    QStyle *style = widget ? widget->style() : QApplication::style();
+		    style->drawControl(QStyle::CE_ItemViewItem,&opt,painter,widget);
+		  }
+	};
 	
 4. 如果你需要制作 makeqpf 请参考这篇文章 [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) ,并在 Ubuntu 16.04 下按步骤执行 <p>If you want to make a "makeqpf", the website  [http://blog.csdn.net/u014213012/article/details/53352645](http://blog.csdn.net/u014213012/article/details/53352645) could help you ,please follow the web and make it in Ununtu 16.04 .<p>
 
@@ -38,23 +35,29 @@
 
 7. 如果一个 QLabel 的 是不规则形状的（比如圆角矩形），如果想让 QLabel 中插入的图片呈现出完全一样的形状，可以使用下面的代码。addRoundedRect() 函数可以换成其他函数，以实现不同的形状。<p>If a QLabel is an irregular shape (such as a rounded rectangle), you can use the following code if you want the picture inserted in QLabel to show exactly the same shape. The addRoundedRect () function can be replaced by other functions to implement different shapes.
 
-		void paintEvent(QPaintEvent *e)
+	void paintEvent(QPaintEvent *e)
+	{
+		if(pixmap())
 		{
-	    	if(pixmap()){
-	     	      QPainter painter(this);
-	     	      painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
-	     	      QPainterPath path;
-		      path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);// replace 10 with the size you want.
-		      painter.setClipPath(path);
-		      painter.drawPixmap(0, 0, width(), height(), *pixmap());
-	       }else{
-	           ClickableQLable::paintEvent(e);
-	       }     
+			QPainter painter(this);
+			painter.setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+			QPainterPath path;
+			path.addRoundedRect(this->rect(), 10, 10, Qt::AbsoluteSize);
+			// replace 10 with the size you want.
+			painter.setClipPath(path);
+			painter.drawPixmap(0, 0, width(), height(), *pixmap());
 		}
+		else
+		{
+			 ClickableQLable::paintEvent(e);
+		}     
+	}
 	
 8. 如果需要发送自定义事件到 QT 事件循环中，可以使用如下代码先注册 自定义事件。<p>If you want to send a customed event to the Event Loop of QT Application, you can use the code to regist QCustomEvent first.<p>
 
-		QEvent::Type myEventType = QEvent::Type(QEvent::registerEventType(1200));//you can replace 1200 with the number you want. using #define is better;
+		QEvent::Type myEventType = QEvent::Type(QEvent::registerEventType(1200));
+		//you can replace 1200 with the number you want. using #define is better;
+		
     <p>然后使用如下代码 发送到事件循环中。<p> Then send it to the Event Lopp using the code as follow.<p>
 	
 		QApplication::postEvent(this->parent()->parent(), new QEvent(myEventType));	
