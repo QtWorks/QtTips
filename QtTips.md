@@ -69,7 +69,7 @@
 		}
 	
 	
-9.继承 QListWidgetItem ,添加 setEnable(bool isEnable) 方法，可以实现 QListWidget/QListView 中的 item 是否允许被点击。<p>Inherited QListWidgetItem, add setEnabled (bool isEnabled) method, you can set QListWidget / QListView in the item is allowed to be click or not.
+9. 继承 QListWidgetItem ,添加 setEnable(bool isEnable) 方法，可以实现 QListWidget/QListView 中的 item 是否允许被点击。<p>Inherited QListWidgetItem, add setEnabled (bool isEnabled) method, you can set QListWidget / QListView in the item is allowed to be click or not.
 
 	void setEnbale(bool isEnable)
 	{
