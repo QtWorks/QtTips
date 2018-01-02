@@ -78,4 +78,7 @@
 	    else
 	        this->setFlags(this->flags() & ~Qt::ItemIsEnabled);
 	}
+	
+10. 如果 QtCreator 没有代码自动补全，请检查设置 工具-->选项-->文本编辑器-->补全。如果还是没有代码提示，将输入法切换到英文输入法。中文输入法的英文输入也不行。
+ While QtCreator cannot completing code,Please check at tools-->options-->TextEditor-->Completion. If this cannot fix it, please check your input method, I think it could use only when the input method is English.
 
